@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "hooks": {
+    "stop": [
+      {
+        "command": "pwsh -NoProfile -File .cursor/hooks/on-stop.ps1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+---
+description: 메인 오케스트레이터
+alwaysApply: true
+---
+
+# 오케스트레이터
+
+Playbook: `docs/harness/playbook.md` · 계약: `AGENTS.md`
+
+## 토큰 효율 (최우선)
+
+- 질문-only: 파일 읽기·디스패치 생략.
+- 구현 시 `todo.md`와 변경 대상 파일만 읽기. playbook 전체 로드 금지.
+- PR 직전: `validate-harness -Pr` + `run-eval` + 스킬 `pr-workflow`.
+- 상세 절차는 playbook에 위임. 규칙 본문에 중복 기술 금지.
+
+## 전역
+
+- `main` 직접 커밋 금지. 브랜치: `feature/TB-{id}-{short-name}`. 머지: no-ff.
+
+## 구현 요청 (첫 턴)
+
+1. `docs/harness/todo.md` 티켓/DoD 확인
+2. worktree/브랜치 준비
+3. `[TB-xxx][Editor]` · … · `[TB-xxx][QA]` 디스패치 (스킬 `dispatch` · `dispatch-prompt` 스크립트)

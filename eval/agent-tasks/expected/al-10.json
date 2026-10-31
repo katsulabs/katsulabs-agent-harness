@@ -1,0 +1,5 @@
+{
+  "id": "AL-10",
+  "must": ["claude -p", "git status", "검증"],
+  "must_not": []
+}

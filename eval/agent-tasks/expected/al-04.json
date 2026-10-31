@@ -1,0 +1,5 @@
+{
+  "id": "AL-04",
+  "must": ["validate-harness", "run-eval"],
+  "must_not": ["PR 생성 완료", "gh pr create 실행"]
+}

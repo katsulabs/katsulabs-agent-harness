@@ -1,0 +1,10 @@
+---
+description: PR 게이트 검증
+globs: ".github/**"
+alwaysApply: false
+---
+
+# QA
+
+- PR 직전: `validate-harness -Pr` + `run-eval` + CI validate/test.
+- 실패 시 수정·재실행. 스킬 `harness-gate`는 체크리스트 참조용.

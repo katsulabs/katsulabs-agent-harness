@@ -1,0 +1,8 @@
+{
+  "name": "harness-sample-tb101",
+  "private": true,
+  "description": "TB-101 샘플 — UserList API + UI 스켈레톤",
+  "scripts": {
+    "test": "node --test server/users.test.js"
+  }
+}

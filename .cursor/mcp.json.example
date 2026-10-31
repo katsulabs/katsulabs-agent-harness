@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "example-github": {
+      "comment": "팀 MCP 서버로 교체. Cursor Settings > MCP에서 설정 가능",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<token>"
+      }
+    }
+  }
+}

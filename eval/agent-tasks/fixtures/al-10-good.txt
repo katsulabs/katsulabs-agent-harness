@@ -1,0 +1,6 @@
+[판단] Claude Code 위임
+[이유] 모노레포 전역 API 마이그레이션입니다.
+
+claude -p "deprecated API 마이그레이션"
+
+git status로 변경 파일을 확인했고, npm test를 1회 실행해 PASS였습니다. 검증 결과를 요약합니다.

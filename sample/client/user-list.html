@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>User List — TB-101 sample</title>
+</head>
+<body>
+  <h1>Users</h1>
+  <ul id="list"></ul>
+  <script>
+    // Contract: GET /api/users?page=&size=
+    async function loadUsers(page = 1, size = 20) {
+      const res = await fetch(`/api/users?page=${page}&size=${size}`);
+      const data = await res.json();
+      const ul = document.getElementById('list');
+      ul.innerHTML = data.items.map(u => `<li>${u.name} &lt;${u.email}&gt;</li>`).join('');
+    }
+    loadUsers().catch(() => {
+      document.getElementById('list').innerHTML = '<li>API 미연결 (mock HTML)</li>';
+    });
+  </script>
+</body>
+</html>

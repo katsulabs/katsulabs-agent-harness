@@ -1,0 +1,4 @@
+[판단] Cursor 직접 처리
+[이유] 사용자 override로 Cursor에서 직접 진행합니다.
+
+마이그레이션을 Cursor에서 직접 수행합니다.

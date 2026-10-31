@@ -1,0 +1,12 @@
+---
+description: 문서·규칙·PR 템플릿 편집
+globs: "docs/**,.cursor/**,.github/**"
+alwaysApply: false
+---
+
+# Editor
+
+- 범위: `docs/**`, `.cursor/**`, `.github/**`
+- 용어·범위 변경 시 관련 파일만 동기화. 전체 문서 스캔 금지.
+- 수술적 변경: 요청 범위 밖 수정 금지.
+- PR 직전: `validate-harness -Pr` + `run-eval`.

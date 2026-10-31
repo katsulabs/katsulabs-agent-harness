@@ -1,0 +1,11 @@
+---
+ticket: TB-101
+from: Contract
+status: ready
+---
+
+## API 변경
+GET /api/users
+
+## Breaking change
+없음

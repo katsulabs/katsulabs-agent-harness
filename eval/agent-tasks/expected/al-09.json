@@ -1,0 +1,5 @@
+{
+  "id": "AL-09",
+  "must": ["설명", "함수"],
+  "must_not": ["claude -p", "claude --version", "[판단]"]
+}

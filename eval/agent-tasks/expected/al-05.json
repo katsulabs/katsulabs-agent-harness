@@ -1,0 +1,5 @@
+{
+  "id": "AL-05",
+  "must": ["[TB-", "][Backend]", "범위", "DoD"],
+  "must_not": []
+}

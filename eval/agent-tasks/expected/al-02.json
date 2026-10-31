@@ -1,0 +1,5 @@
+{
+  "id": "AL-02",
+  "must": ["---", "ticket:", "API 변경", "Breaking change"],
+  "must_not": []
+}

@@ -1,0 +1,4 @@
+# Shell scripts: Unix line endings (macOS / Linux / Git Bash)
+*.sh text eol=lf
+.githooks/* text eol=lf
+docs/harness/*.md text eol=lf

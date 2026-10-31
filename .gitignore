@@ -1,0 +1,5 @@
+.env
+.cursor/mcp.json
+.worktrees/
+.DS_Store
+dist/

@@ -1,0 +1,12 @@
+---
+description: 백엔드 코드 영역 (서버·API·비즈니스 로직)
+globs: "modules/**,backend/**,server/**,api/**"
+alwaysApply: false
+---
+
+# Backend
+
+- 범위: `modules/**`, `backend/**`, `server/**`, `api/**` (프로젝트 구조에 맞게 globs 조정)
+- 테스트: 변경 시 해당 영역 테스트 실행
+- 계약: API/DTO·migration 변경 시 Contract·문서·Frontend와 동기화
+- PR 직전: `validate-harness -Pr` + 백엔드 테스트 게이트

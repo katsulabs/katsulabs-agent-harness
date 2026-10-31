@@ -1,0 +1,63 @@
+name: harness-gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, 'feature/**', 'cursor/**']
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Harness validate
+        shell: bash
+        run: bash ./scripts/validate-harness.sh
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Project eval
+        shell: bash
+        run: bash ./scripts/run-eval.sh
+
+  validate-platforms:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            run: bash ./scripts/validate-harness.sh
+          - os: windows-latest
+            run: pwsh ./scripts/validate-harness.ps1
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Harness validate (${{ matrix.os }})
+        shell: bash
+        run: ${{ matrix.run }}
+
+  test-platforms:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Project eval (${{ matrix.os }})
+        shell: bash
+        run: |
+          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then
+            pwsh ./scripts/run-eval.ps1
+          else
+            bash ./scripts/run-eval.sh
+          fi

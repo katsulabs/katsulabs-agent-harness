@@ -1,0 +1,8 @@
+{
+  "Editor":   ["docs/**", ".cursor/**", ".claude/**", ".github/**"],
+  "Contract": ["db/**", "**/dto/**", "**/openapi.*", "contracts/**", "api-spec/**"],
+  "Backend":  ["modules/**", "backend/**", "server/**", "api/**"],
+  "Frontend": ["frontend/**", "client/**", "apps/web/**"],
+  "QA":       ["eval/**", "scripts/**", "docs/harness/handoffs/**"],
+  "Main":     ["docs/**"]
+}

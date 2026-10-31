@@ -1,0 +1,2 @@
+[판단] Cursor 직접 처리
+[이유] claude --version 실패로 CLI 불가, Cursor에서 탐색·검증을 진행합니다.

@@ -1,0 +1,1 @@
+todo.md 활성 티켓 TB-013의 DoD는 handoff 린터와 eval 리포트입니다. playbook 전체는 로드하지 않았습니다.

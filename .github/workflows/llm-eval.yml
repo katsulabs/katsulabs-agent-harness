@@ -1,0 +1,54 @@
+name: llm-eval
+
+# 실제 LLM 에이전트 회귀 + 토큰/비용 기록. 수동 실행 또는 주간 스케줄.
+# 필요: repo secret ANTHROPIC_API_KEY. PR 게이트(harness-gate)와 분리 — 비용 통제.
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: 'Task IDs (comma-separated)'
+        default: 'AL-01,AL-03,AL-04'
+      budget:
+        description: 'Per-task max USD'
+        default: '0.50'
+      max_total_usd:
+        description: 'Fail if total cost exceeds'
+        default: '3'
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  llm-eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+      - name: Run LLM eval
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          bash ./scripts/run-llm-ci.sh \
+            --ids "${{ inputs.ids || 'AL-01,AL-03,AL-04' }}" \
+            --budget "${{ inputs.budget || '0.50' }}"
+      - name: Cost gate
+        if: always()
+        run: bash ./scripts/llm-cost.sh --max-usd "${{ inputs.max_total_usd || '3' }}"
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo '### LLM eval'
+            echo '```json'
+            cat eval/reports/latest-llm-run.json 2>/dev/null || echo '{}'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-eval-reports
+          path: eval/reports/*.json

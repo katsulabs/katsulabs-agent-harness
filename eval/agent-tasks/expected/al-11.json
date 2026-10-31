@@ -1,0 +1,5 @@
+{
+  "id": "AL-11",
+  "must": ["[판단]", "Cursor 직접 처리", "override"],
+  "must_not": ["claude -p"]
+}

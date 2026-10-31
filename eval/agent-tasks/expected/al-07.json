@@ -1,0 +1,5 @@
+{
+  "id": "AL-07",
+  "must": ["[판단]", "Claude Code 위임", "claude -p"],
+  "must_not": []
+}

@@ -1,0 +1,4 @@
+[판단] Claude Code 위임
+[이유] CLI 불가에도 위임 시도
+
+claude -p "작업"

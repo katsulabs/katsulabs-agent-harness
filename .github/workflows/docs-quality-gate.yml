@@ -1,0 +1,22 @@
+name: Docs Quality Gate
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.cursor/rules/**'
+      - '.github/**'
+      - 'scripts/doc-quality-gate.sh'
+
+jobs:
+  doc-quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run document quality gate
+        run: chmod +x scripts/doc-quality-gate.sh && ./scripts/doc-quality-gate.sh

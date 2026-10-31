@@ -1,0 +1,5 @@
+{
+  "id": "AL-01",
+  "must": ["todo", "TB-"],
+  "must_not": ["playbook.md 전체", "playbook 전체 로드"]
+}
