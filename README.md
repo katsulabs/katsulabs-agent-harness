@@ -111,6 +111,8 @@ BLOCKED(harness): main 직접 push 금지 — PR로 머지 (AGENTS.md)
 ### 한계
 
 - Bash 훅 가드는 문자열 휴리스틱입니다. 최후 방어선은 branch protection과 CI입니다.
+- `run-llm-ci.sh` 실호출(`claude -p`)은 아직 실제 환경에서 실행·검증하지 않았습니다. `--dry-run`(fixture)만 CI로 검증됩니다. 실호출 전 `--budget`으로 비용 상한을 두세요.
+- Linux·macOS·Windows(Git Bash)에서 셸 스크립트를 CI로 검증합니다. PowerShell(`.ps1`)은 validate/eval 경로만 CI(Linux pwsh)로 확인했고, 나머지는 `.sh` 중심입니다.
 - 오케스트레이터 서비스·관측 대시보드는 범위 밖입니다 (4세대).
 - 라이선스: MIT — [LICENSE](LICENSE) (영문, 우선) · [LICENSE.ko.md](LICENSE.ko.md) (참고 번역).
 
@@ -207,5 +209,7 @@ Start at [introduction.md](docs/harness/introduction.md), then [how-to-use.md](d
 ### Limitations
 
 - The Bash hook guard is a string heuristic; branch protection and CI remain the last line of defense.
+- The real `claude -p` path of `run-llm-ci.sh` has not been exercised in a live environment yet; only `--dry-run` (fixtures) is verified in CI. Set `--budget` before a real run.
+- Shell scripts are CI-tested on Linux, macOS and Windows (Git Bash). PowerShell (`.ps1`) is CI-checked only for the validate/eval path (Linux pwsh); the rest is `.sh`-first.
 - No orchestrator service or observability dashboard (generation 4 is out of scope).
 - License: MIT — see [LICENSE](LICENSE) (controlling) and [LICENSE.ko.md](LICENSE.ko.md) (reference translation).
