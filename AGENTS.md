@@ -4,9 +4,9 @@
 
 ## 프로젝트
 
-- **이름**: [프로젝트명]
-- **스택**: [예: Node/React, Spring/Vue, monorepo]
-- **구조**: [예: backend=server/, frontend=client/]
+- **이름**: katsulabs-agent-harness
+- **스택**: Bash · PowerShell 스크립트 하네스 (훅·CI), Node 20 (`sample/` mock)
+- **구조**: scripts/=검증·훅, docs/harness/=운영 문서, eval/=회귀, sample/{server,client,api-spec}=연습용 mock
 
 ## 에이전트 계약
 
