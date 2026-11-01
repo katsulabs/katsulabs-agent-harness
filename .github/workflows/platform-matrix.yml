@@ -1,0 +1,56 @@
+name: platform-matrix
+
+# 스킬 단독 동작·훅 가드를 Linux / macOS / Windows(Git Bash)에서 검증한다.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: ['feature/**']
+  workflow_dispatch:
+
+jobs:
+  shell-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Git identity (테스트가 임시 저장소를 만든다)
+        shell: bash
+        run: |
+          git config --global user.email ci@example.com
+          git config --global user.name ci
+          git config --global init.defaultBranch main
+      - name: Tool versions
+        shell: bash
+        run: bash --version | head -1; git --version; jq --version
+      - name: Skills standalone
+        shell: bash
+        run: bash ./eval/skills-standalone.test.sh
+      - name: Guard hook
+        shell: bash
+        run: bash ./eval/guard-tool.test.sh
+      - name: Adapters in sync
+        shell: bash
+        run: bash ./scripts/sync-adapters.sh --check
+      - name: Context budget
+        shell: bash
+        run: bash ./scripts/context-budget.sh
+      - name: LLM runner dry-run
+        shell: bash
+        run: bash ./scripts/run-llm-ci.sh --dry-run
+      - name: Harness smoke (bash)
+        shell: bash
+        run: bash ./scripts/run-eval.sh
+
+  pwsh-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: pwsh harness validate + eval
+        shell: pwsh
+        run: |
+          ./scripts/validate-harness.ps1
+          ./scripts/run-eval.ps1
