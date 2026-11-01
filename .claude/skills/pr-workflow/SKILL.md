@@ -10,7 +10,7 @@ Requires: `git`, `bash`. Optional: `gh` (GitHub CLI). Works on any repo.
 
 ## Steps
 
-1. **Quality gate first** - run your project gate (the `harness-gate` skill, or your CI-equivalent test command). Do not open a PR on a red gate.
+1. **Quality gate first** - run your project gate (the `harness-gate` skill, or your CI-equivalent test command). In this harness repo that is `scripts/validate-harness.sh -Pr` and `scripts/run-eval.sh`. Do not open a PR on a red gate.
 2. **Preflight**
 
    ```bash

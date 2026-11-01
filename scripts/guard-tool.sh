@@ -39,11 +39,16 @@ case "$tool" in
     file="$(jq -r '.tool_input.file_path // .tool_input.notebook_path // empty' <<<"$input")"
     [[ -z "$file" ]] && exit 0
     # 심볼릭 경로 차이(macOS /var → /private/var) 대비: 여러 접두사 시도
+    # Windows(Git Bash): C:\x, C:/x, /c/x 형태가 섞이므로 모두 C:/x 로 정규화
+    norm() { if command -v cygpath >/dev/null 2>&1; then cygpath -m "$1" 2>/dev/null || echo "${1//\\//}"; else echo "${1//\\//}"; fi; }
+    file="$(norm "$file")"
     rel="$file"
     for top in "$(git -C "$cwd" rev-parse --show-toplevel 2>/dev/null)" "$(cd "$cwd" && pwd)" "$(cd "$cwd" && pwd -P)" "$ROOT"; do
-      [[ -n "$top" && "$file" == "$top"/* ]] && { rel="${file#"$top"/}"; break; }
+      [[ -n "$top" ]] || continue
+      top="$(norm "$top")"
+      [[ "$file" == "$top"/* ]] && { rel="${file#"$top"/}"; break; }
     done
-    scopes="$(jq -r --arg r "$role" '.[$r] // empty | .[]' "$ROOT/scripts/role-scopes.json" 2>/dev/null)"
+    scopes="$(jq -r --arg r "$role" '.[$r] // empty | .[]' "$ROOT/scripts/role-scopes.json" 2>/dev/null | tr -d '\r')"
     [[ -z "$scopes" ]] && deny "알 수 없는 HARNESS_ROLE='$role' (scripts/role-scopes.json)"
     ok=false
     while IFS= read -r g; do

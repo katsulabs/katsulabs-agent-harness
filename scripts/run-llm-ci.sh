@@ -31,16 +31,16 @@ score() { # $1=rules.json $2=text → "ok" | "missing must: x" | "forbidden: x"
   while IFS= read -r m; do
     [[ -z "$m" ]] && continue
     grep -qiF -- "$m" <<<"$text" || { echo "missing must: $m"; return 1; }
-  done < <(jq -r '.must[]?' "$rules")
+  done < <(jq -r '.must[]?' "$rules" | tr -d '\r' | tr -d '\r')
   if [[ "$(jq -r '(.must_any // []) | length' "$rules")" -gt 0 ]]; then
     local any=1
-    while IFS= read -r m; do grep -qiF -- "$m" <<<"$text" && any=0; done < <(jq -r '.must_any[]' "$rules")
+    while IFS= read -r m; do grep -qiF -- "$m" <<<"$text" && any=0; done < <(jq -r '.must_any[]' "$rules" | tr -d '\r' | tr -d '\r')
     [[ $any -eq 0 ]] || { echo "missing must_any"; return 1; }
   fi
   while IFS= read -r m; do
     [[ -z "$m" ]] && continue
     grep -qiF -- "$m" <<<"$text" && { echo "forbidden: $m"; return 1; }
-  done < <(jq -r '.must_not[]?' "$rules")
+  done < <(jq -r '.must_not[]?' "$rules" | tr -d '\r' | tr -d '\r')
   echo ok
 }
 
