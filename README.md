@@ -112,7 +112,7 @@ BLOCKED(harness): main 직접 push 금지 — PR로 머지 (AGENTS.md)
 
 - Bash 훅 가드는 문자열 휴리스틱입니다. 최후 방어선은 branch protection과 CI입니다.
 - 오케스트레이터 서비스·관측 대시보드는 범위 밖입니다 (4세대).
-- 라이선스: 상용 라이선스 **초안** — [LICENSE](LICENSE) (영문, 우선) · [LICENSE.ko.md](LICENSE.ko.md) (참고 번역). 법률 검토 전.
+- 라이선스: MIT — [LICENSE](LICENSE) (영문, 우선) · [LICENSE.ko.md](LICENSE.ko.md) (참고 번역).
 
 ---
 
@@ -208,4 +208,4 @@ Start at [introduction.md](docs/harness/introduction.md), then [how-to-use.md](d
 
 - The Bash hook guard is a string heuristic; branch protection and CI remain the last line of defense.
 - No orchestrator service or observability dashboard (generation 4 is out of scope).
-- License: commercial license **draft**, not yet reviewed by counsel — see [LICENSE](LICENSE) (controlling) and [LICENSE.ko.md](LICENSE.ko.md) (reference translation).
+- License: MIT — see [LICENSE](LICENSE) (controlling) and [LICENSE.ko.md](LICENSE.ko.md) (reference translation).
